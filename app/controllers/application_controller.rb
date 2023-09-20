@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  # Deviseコントローラー作動前に実行
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # ログイン後、ルートパスに飛ばす

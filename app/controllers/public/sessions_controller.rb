@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
-  # ログイン時に実行
   before_action :reject_inactive_user, only: [:create]
 
   # ゲストログインメソッド
