@@ -1,0 +1,53 @@
+@use '~bootstrap/scss/bootstrap';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-size: border-box;
+}
+
+header {
+  background-color: #003366;
+}
+
+footer {
+  background-color: #003366;
+  color: white;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-toggler {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='3' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* -------------------- */
+/* ページネーション設定 */
+/* -------------------- */
+
+.pagination>li {
+  vertical-align: baseline;
+  margin: 0 6px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination>li>a {
+  border: none;
+  color: #343a40;
+  margin: 0 7px;
+}
+
+.pagination>.current {
+  background: rgba(147,201,255,0.4);
+  border-radius: 15px;
+}
+
+.pagination>li:hover {
+  border-radius: 50%;
+  background-color: rgba(147,201,255,0.7);
+  border: red;
+}
