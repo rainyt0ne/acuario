@@ -1,0 +1,85 @@
+<header>
+  <div class="header">
+
+    <!--ヘッダーロゴ-->
+    <div class="logo_header">
+      <%= link_to root_path do %>
+        <%= image_tag 'acuario.png' , size: "90×90" %>
+      <% end %>
+    </div>
+
+    <div>
+      <% if user_signed_in? %>
+        ようこそ、 <%= current_user.name %> さん！
+      <% end %>
+    </div>
+
+    <!--ナビゲーションバー-->
+    <nav class="area_nav_header">
+      <ul class="list_nav_header">
+
+        <!--ユーザー側ログイン-->
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to user_path(current_user.id),class: 'nav-link text-light' do %>
+              <i class="fas fa-home"></i> Home
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to posts_path,class: 'nav-link text-light' do %>
+              <i class="fa-solid fa-tower-cell"></i> Posts
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>
+              <i class="fas fa-sign-out-alt"></i> Log out
+            <% end %>
+          </li>
+
+        <!--管理者側ログイン-->
+        <% elsif admin_signed_in? %>
+          <li class="nav-item">
+            <%= link_to admin_users_path,class: 'nav-link text-light' do %>
+              <i class="fa-solid fa-people-group"></i> Users
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_posts_path,class: 'nav-link text-light' do %>
+              <i class="fa-solid fa-tower-cell"></i> Posts
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %>
+              <i class="fas fa-sign-out-alt"></i> Log out
+            <% end %>
+          </li>
+
+        <!--ログイン前-->
+        <% else %>
+          <li class="nav-item">
+            <%= link_to new_user_registration_path,class: 'nav-link text-light' do %>
+              <i class="fas fa-user-plus"></i> Sign up
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_user_session_path ,class: 'nav-link text-light' do %>
+              <i class="fas fa-sign-in-alt"></i> Log in
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_guest_signed_in_path ,class: 'nav-link text-light' do %>
+              <i class="fa-solid fa-person-circle-check"></i> Guest
+            <% end %>
+          </li>
+        <% end %>
+
+        <!--検索バー-->
+        <li class="nav-item">
+          <div class="search_box">
+            <%= render "public/posts/search_word" %>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
