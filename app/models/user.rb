@@ -10,14 +10,16 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  has_one_attached :profile_image
+
   # 自分 → フォローする側の関係性（与フォロー）
-  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   # フォロワー → 自分のされる側の関係性（被フォロー）
-  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   # 自分のフォロー一覧
-  has_many :followings, through: :active_relationships, source: :followed
+  has_many :followings, through: :relationships, source: :followed
   # 自分のフォロワー一覧
-  has_many :followers, through: :passive_relationships, source: :follower
+  has_many :followers, through: :reverse_of_relationships, source: :follower
 
   # フォローする
   def follow(user_id)
@@ -33,8 +35,6 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-
-  has_one_attached :profile_image
 
   # プロフィール画像編集 （無ければサンプル画像添付）
   def get_profile_image(width, height)
@@ -57,6 +57,19 @@ class User < ApplicationRecord
   def self.search(search)
     if search != ""
       User.where(['name LIKE?', "%#{search}%"])
+    end
+  end
+
+  # 通知作成(フォロー)
+  def create_notification_follow!(current_user)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    # 通知がない場合、作成
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: 'follow'
+        )
+        notification.save if notification.valid?
     end
   end
 

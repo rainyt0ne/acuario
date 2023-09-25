@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     # ユーザー退会用
     get '/users/confirm' => 'users#confirm'
     patch '/users/withdrawal' => 'users#withdrawal', as: 'withdrawal'
-    resources :users, only: [:show, :show, :edit, :update, :destroy] do
+    resources :users, only: [:index, :show, :edit, :update, :destroy] do
       member do
         get :likes
       end
