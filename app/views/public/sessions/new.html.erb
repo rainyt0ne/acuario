@@ -1,26 +1,49 @@
-<h2>Log in</h2>
+<div>
+  <%= flash[:notice] %>
+  <%= flash[:alert] %>
+</div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<div class="container py-5">
+  <div class="row">
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div class="col-md-3 text-center">
+        <button type="button" class="btn btn-success rounded-circle p-0 top-btn", style="width:10rem;height:10rem;">
+          <h2><strong>Log in</strong></h2>
+        </button><br>
+      <button type="button" class="btn btn-success rounded-circle p-0 mt-2 mr-5 top-btn", style="width:3rem;height:3rem;"></button><br>
+      <button type="button" class="btn btn-success rounded-circle p-0 mt-2 ml-5 top-btn", style="width:1rem;height:1rem;"></button><br>
+      <button type="button" class="btn btn-success rounded-circle p-0 mt-2 mr-3 top-btn", style="width:2rem;height:2rem;"></button>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <div class="col-md-8 offset-md-1">
+      <!--form_forはRails5.1より非推奨のためform_withに変更-->
+      <%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= form_with model: @user, url: user_session_path do |f| %>
+
+        <div class="field">
+          <i class="fa-solid fa-envelope pr-2"></i><%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <div class="field pt-3">
+          <i class="fa-solid fa-key pr-2"></i><%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password" %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="field pt-3">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "Log in", class: "btn btn-outline-success" %>
+        </div>
+      <% end %>
+
+      <%#= render "public/shared/links" %>
+
+    </div>
   </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>

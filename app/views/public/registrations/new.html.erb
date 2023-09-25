@@ -1,29 +1,51 @@
-<h2>Sign up</h2>
+<div class="container py-5">
+  <div class="row">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
+    <div class="col-md-3 text-center">
+        <button type="button" class="btn btn-info rounded-circle p-0 top-btn", style="width:10rem;height:10rem;">
+          <h2><strong>Sign up</strong></h2>
+        </button><br>
+      <button type="button" class="btn btn-info rounded-circle p-0 mt-2 mr-5 top-btn", style="width:3rem;height:3rem;"></button><br>
+      <button type="button" class="btn btn-info rounded-circle p-0 mt-2 ml-5 top-btn", style="width:1rem;height:1rem;"></button><br>
+      <button type="button" class="btn btn-info rounded-circle p-0 mt-2 mr-3 top-btn", style="width:2rem;height:2rem;"></button>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="col-md-8 offset-md-1">
+      <!--form_forはRails5.1より非推奨のためform_withに変更-->
+      <%#= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= form_with model: @user, url: user_registration_path do |f| %>
+        <%= render "public/shared/error_messages", resource: resource %>
+
+        <div class="field">
+          <i class="fa-solid fa-file-signature pr-2"></i><%= f.label :name %><br>
+          <%= f.text_field :name %>
+        </div>
+
+        <div class="field pt-3">
+          <i class="fa-solid fa-envelope pr-2"></i><%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <div class="field pt-3">
+          <i class="fa-solid fa-key pr-2"></i><%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+
+        <div class="field pt-3">
+          <i class="fa-solid fa-key pr-2"></i><%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+        <br>
+        <div class="actions">
+          <%= f.submit "Sign up", class: "btn btn-outline-info" %>
+        </div>
+      <% end %>
+      <br>
+      <%#= render "public/shared/links" %>
+
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>
