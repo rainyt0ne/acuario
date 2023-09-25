@@ -1,2 +1,36 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <h1>Welcome to <i class="fa-solid fa-otter"></i><strong> Acuario </strong><i class="fa-solid fa-fish-fins"></i></h1>
+    <p>
+      全国の<strong>水族館情報</strong>が集まるサイトです。あなたの好きな<strong>水生生物</strong>について投稿しましょう！<br>
+      ※ご利用には登録していただく必要があります。
+    </p>
+  </div>
+
+  <div class="row pt-5 justify-content-center">
+    <%= link_to new_user_registration_path do %>
+        <button type="button" class="btn btn-info rounded-circle p-0 top-btn shadow-lg", style="width:15rem;height:15rem;">
+          <p><strong>Sign up</strong></p>
+          <h1><i class="fa-solid fa-disease"></i></h1><br>
+          新規登録をする</button>
+    <% end %>
+
+    <%= link_to new_user_session_path do %>
+        <button type="button" class="btn btn-success rounded-circle p-0 top-btn mx-5 shadow-lg", style="width:15rem;height:15rem;">
+          <p><strong>Log in</strong></p>
+          <h1><i class="fa-solid fa-shrimp"></i></h1><br>
+          ログインする</button>
+    <% end %>
+
+    <%= link_to users_guest_sign_in_path, method: :post do %>
+        <button type="button" class="btn btn-secondary rounded-circle p-0 top-btn shadow-lg", style="width:15rem;height:15rem;">
+          <p><strong>Guest Log in</strong></p>
+          <h1><i class="fa-solid fa-anchor"></i></h1><br>
+          ゲストとしてログイン<br>(閲覧用)</button>
+    <% end %>
+  </div>
+</div>
