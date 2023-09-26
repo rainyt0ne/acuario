@@ -1,6 +1,0 @@
-<%= form_with url: search_posts_path, local: true, method: :get, class: "search" do |f| %>
-  <%= f.text_field :word, placeholder: ' Search Posts..' %>
-  <%= button_tag type: :submit, class: "btn-search" do %>
-    <i class="fa-solid fa-magnifying-glass"></i>
-  <% end %>
-<% end %>

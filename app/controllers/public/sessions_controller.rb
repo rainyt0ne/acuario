@@ -3,11 +3,21 @@
 class Public::SessionsController < Devise::SessionsController
   before_action :reject_inactive_user, only: [:create]
 
+  # ユーザーログイン後の遷移先
+  def after_sign_in_path_for(resource)
+    user_path(current_user.id)
+  end
+
+  # ユーザーログアウト後の遷移先
+  def after_sign_up_path_for(resource)
+    root_path(resource)
+  end
+
   # ゲストログインメソッド
   def guest_sign_in
     user = User.guest
     sign_in user
-    redirect_to root_path, notice: "ゲストとしてログインしました！"
+    redirect_to user_path(user), notice: "ゲストとしてログインしました！"
   end
 
   # 退会済みなら別のメールアドレス使用を促す

@@ -30,6 +30,11 @@
               <% end %>
             </li>
             <li class="nav-item">
+              <%= link_to users_path,class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-people-group"></i> <strong>Users</strong>
+              <% end %>
+            </li>
+            <li class="nav-item">
               <%= link_to posts_path,class: 'nav-link text-light' do %>
                 <i class="fa-solid fa-tower-cell"></i> <strong>Posts</strong>
               <% end %>
@@ -39,6 +44,17 @@
                 <i class="fas fa-sign-out-alt"></i> <strong>Log out</strong>
               <% end %>
             </li>
+
+            <!--通知-->
+            <!--<li class="nav-item">
+              <%#= link_to notifications_path, class: 'nav-link' do %>
+                <%# if unchecked_notifications.any? %>
+                  <i class="fa-solid fa-bell"></i>
+                <%# else %>
+                  <i class="fa-solid fa-bell-slash"></i>
+                <%# end %>
+              <#% end %>
+            </li>-->
 
           <!--管理者側ログイン-->
           <% elsif admin_signed_in? %>
@@ -77,12 +93,6 @@
             </li>
           <% end %>
 
-          <!--検索バー-->
-          <li class="nav-item">
-            <div class="search_box py-2 pl-2">
-              <%= render "public/posts/search_word" %>
-            </div>
-          </li>
         </ul>
       </div>
     </div>
