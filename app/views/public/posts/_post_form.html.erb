@@ -1,0 +1,22 @@
+<%= form_with model: post do |f| %>
+
+  <div class="form-group">
+    <label>image</label>
+      <%= f.file_field :image, accept: "image/*" %>
+  </div>
+
+  <div class="form-group">
+    <label>title</label>
+      <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label>body</label>
+      <%= f.text_area :body, rows: '5', class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+      <%= f.submit '投稿する', class: 'btn btn-info' %>
+  </div>
+
+<% end %>

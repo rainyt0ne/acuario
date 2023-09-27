@@ -1,0 +1,11 @@
+<div class="container py-5">
+  <div class="row-md-4">
+    <h3 class="pb-3">New Post</h3>
+
+    <div class="post-form">
+      <!--投稿フォーム呼び出し-->
+      <%= render 'post_form', post: @post %>
+    </div>
+    <%= link_to 'Back', user_path(current_user) %>
+  </div>
+</div>
