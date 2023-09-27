@@ -42,7 +42,7 @@ class User < ApplicationRecord
       file_path = Rails.root.join("app/assets/images/no_image.jpg")
       profile_image.attach(io: File.open(file_path), filename: "default-image.jpg", content_type: "image/jpeg")
     end
-    profile_image
+    profile_image.variant(resize_to_fill: [width, height], gravity: :center).processed
   end
 
   # ゲストユーザーの検索（存在しなければランダムパスワードで作成）

@@ -1,6 +1,6 @@
 <% post.comments.each do |comment| %>
   <tr>
-    <th colspan="2"><%= image_tag comment.user.get_profile_image, class: "comment_image" %> <%= comment.user.name %></th>
+    <th colspan="2"><%= image_tag comment.user.get_profile_image(90,90), class: "comment_image" %> <%= comment.user.name %></th>
   </tr>
   <tr>
     <td colspan="2"><%= comment.comment %></td>
