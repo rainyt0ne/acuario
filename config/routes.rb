@@ -21,8 +21,6 @@ Rails.application.routes.draw do
   #ゲストログイン
   devise_scope :user do
     post '/users/guest_sign_in' => 'public/sessions#guest_sign_in'
-    #ユーザー登録失敗時のリダイレクトエラー対策
-    get 'users' => 'public/registrations#new'
   end
 
   # 管理者側のルーティング

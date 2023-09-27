@@ -1,0 +1,18 @@
+<table class="table">
+  <tr>
+    <th>Image</th>
+    <th>Name</th>
+    <th>Follower</th>
+  </tr>
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= image_tag user.get_profile_image(90,90), class: "profile_image" %></td>
+    <td class="text-truncate" style="max-width: 300px;">
+      <%= link_to user_path(user.id), class: "text-decoration-none text-info font-weight-bold" do %>
+        <%= user.name %>
+      <% end %>
+    </td>
+    <td><%= user.followers.count %></td>
+  </tr>
+  <% end %>
+</table>

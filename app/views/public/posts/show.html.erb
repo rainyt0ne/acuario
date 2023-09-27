@@ -7,7 +7,7 @@
 
       <!--フォロー・アンフォロー-->
       <div class="pb-3">
-        <%= unless @users == current_user %>
+        <% unless @users == current_user %>
           <% if current_user.following?(@users) %>
             <%= link_to "Follow", user_relationships_path(@users.id), method: :delete,
               class: 'btn btn-secondary btn-block' %>

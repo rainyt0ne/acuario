@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
-  before_action :reject_inactive_user, only: [:create]
+  #before_action :reject_inactive_user, only: [:create]
 
   # ユーザーログイン後の遷移先
   def after_sign_in_path_for(resource)
@@ -21,16 +21,16 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   # 退会済みなら別のメールアドレス使用を促す
-  def reject_inactive_user
-    @user = User.find_by(email: params[:user][:email])
-    if @user
+  #def reject_inactive_user
+    #@user = User.find_by(email: params[:user][:email])
+    #if @user
       # ユーザーが存在している場合
-      if @user.valid_password?(params[:user][:password]) && !@user.is_withdrawal
-        flash[:alert] = "このメールアドレス使用のユーザーは退会済みです。違うメールアドレスをお使い下さい。"
-        redirect_to new_user_session_path
-      end
-    end
-  end
+      #if @user.valid_password?(params[:user][:password]) && !@user.is_withdrawal
+        #flash[:alert] = "このメールアドレス使用のユーザーは退会済みです。違うメールアドレスをお使い下さい。"
+        #redirect_to new_user_session_path
+      #end
+    #end
+  #end
 
   # before_action :configure_sign_in_params, only: [:create]
 

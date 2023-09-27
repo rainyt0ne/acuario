@@ -20,7 +20,7 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params{:id})
+    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user.id), notice: "プロフィールを編集しました！"
     else
@@ -51,7 +51,7 @@ class Public::UsersController < ApplicationController
 
     # ゲストの編集規制
     def ensure_guest
-      @user = User.find(prams[:id])
+      @user = User.find(params[:id])
       if @user.name == "Guest"
         redirect_to user_path(current_user), alert: "ゲストログインの方はプロフィール編集出来ません。"
       end
