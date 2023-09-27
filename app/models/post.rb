@@ -16,7 +16,7 @@ class Post < ApplicationRecord
       file_path = Rails.root.join("app/assets/images/no_post_image.png")
       image.attach(io: File.open(file_path), filename: "default-image.jpg", content_type: "image/jpeg")
     end
-    image.variant(resize_to_limit: [width, height]).processed
+    image.variant(resize_to_fill: [width, height], gravity: :center).processed
   end
 
   # 投稿検索 (タイトル or 内容　で部分検索)
