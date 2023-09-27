@@ -1,0 +1,34 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col"><h3>Edit profile</h3></div>
+    <div class="col text-right"><%= link_to "退会する", users_confirm_path, class: "btn btn-danger" %></div>
+  </div>
+
+  <div class="row-md-4">
+    <div class="mt-5">
+      <%= form_with model: @user do |f| %>
+        <div class="form-group">
+          <label>User name</label>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <label>image</label>
+          <%= f.file_field :profile_image, accept: "image/*" %>
+        </div>
+
+        <div class="form-group">
+          <label>introduction</label>
+          <%= f.text_area :introduction, rows: '5', class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit '変更を保存', class: 'btn btn-info' %>
+        </div>
+      <% end %>
+    </div>
+    <div class="my-3">
+       <%= link_to 'Back', :back %>
+    </div>
+  </div>
+</div>
