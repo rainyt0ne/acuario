@@ -1,0 +1,18 @@
+<% post.comments.each do |comment| %>
+  <tr>
+    <th colspan="2"><%= image_tag comment.user.get_profile_image, class: "comment_image" %> <%= comment.user.name %></th>
+  </tr>
+  <tr>
+    <td colspan="2"><%= comment.comment %></td>
+  </tr>
+  <tr>
+    <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+    <td>
+      <% if comment.user == current_user %>
+        <%= link_to post_comment_path(comment.post,comment), method: :delete, remote: true do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

@@ -1,0 +1,76 @@
+<div class="container py-5">
+  <div class="row">
+
+    <div class="col-md-3">
+      <!--プロフィール呼び出し-->
+      <%= render '/public/users/user_profile', user: @users %>
+
+      <!--フォロー・アンフォロー-->
+      <div class="pb-3">
+        <%= unless @users == current_user %>
+          <% if current_user.following?(@users) %>
+            <%= link_to "Follow", user_relationships_path(@users.id), method: :delete,
+              class: 'btn btn-secondary btn-block' %>
+          <% else %>
+            <%= link_to "Unfollow", user_relationships_path(@users.id), method: :post,
+              class: 'btn btn-outline-secondary btn-block' %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <!--コメント表示-->
+      <div>
+        <h2>Comment</h2>
+        >> count : <%= @post.comments.count %>
+        <table class="table comments_area">
+          <%= render '/public/comments/comment-list', post: @post %>
+          <tr>
+            <td colspan="2"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Post</h2>
+      <table class="table">
+        <tr>
+          <th class="post-title"><%= @post.title %></th>
+          <td class="text-right">
+            <% if @post.user == current_user %>
+              <%= link_to edit_post_path(@post.id) do %>
+                <button type="button" class="btn btn-success rounded-circle", style="width:3rem;height:3rem;">
+                  <i class="fa-solid fa-gear"></i>
+                </button>
+              <% end %>
+              <%= link_to post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+                <button type="button" class="btn btn-danger rounded-circle", style="width:3rem;height:3rem;">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              <% end %>
+            <% end %>
+          </td>
+
+          <!--いいね機能-->
+          <td  class="like-<%= @post.id %> text-right">
+            <%= render 'public/likes/like-btn', post: @post %>
+          </td>
+        </tr>
+         <tr>
+          <td colspan="3"><%= image_tag @post.get_image(500,500) %></td>
+        </tr>
+        <tr>
+          <td colspan="3"><%= @post.body %></td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+        </tr>
+      </table>
+
+      <!--コメント送信フォーム-->
+      <div class="new-comment">
+        <%= render 'public/comments/comment-form', post: @post, comment: @comment %>
+      </div>
+    </div>
+  </div>
+</div>

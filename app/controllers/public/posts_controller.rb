@@ -66,7 +66,7 @@ class Public::PostsController < ApplicationController
 
     # ゲストの投稿規制
     def ensure_guest
-      @user = User.find(prams[:id])
+      @user = User.find(params[:id])
       if @user.name == "Guest"
         redirect_to user_path(current_user), alert: "ゲストログインの方はプロフィール編集出来ません。"
       end
