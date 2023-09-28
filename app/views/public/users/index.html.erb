@@ -5,9 +5,11 @@
       <!--プロフィール呼び出し-->
       <%= render 'user_profile', user: @user %>
 
-      <div class="pb-3">
-        <%= link_to "followee #{@user.followings.count}", user_followings_path(@user), class: "text-secondary" %> ,
-        <%= link_to "follower #{@user.followers.count}", user_followers_path(@user), class: "text-secondary" %>
+      <div class="bg-light pl-2">
+        <hr>
+          <%= link_to "followee #{@user.followings.count}", user_followings_path(@user), class: "text-dark" %> ,
+          <%= link_to "follower #{@user.followers.count}", user_followers_path(@user), class: "text-dark" %>
+        <hr>
       </div>
 
       <div class="edit-btn">
@@ -21,20 +23,21 @@
           </button>
           <% end %>
         <% end %>
-
+        |
         <!--いいね一覧へのリンク-->
         <%= link_to likes_user_path(@user) do %>
           <button type="button" class="btn btn-outline-danger rounded-circle", style="width:3rem;height:3rem;">
             <i class="fa-solid fa-heart"></i>
           </button>
         <% end %>
-
+        |
         <!--フォロイー・フォロワー一覧へのリンク-->
         <%= link_to user_followings_path(@user) do %>
           <button type="button" class="btn btn-outline-warning rounded-circle", style="width:3rem;height:3rem;">
             <i class="fa-solid fa-handshake"></i>
           </button>
         <% end %>
+        |
         <%= link_to user_followers_path(@user) do %>
           <button type="button" class="btn btn-outline-info rounded-circle", style="width:3rem;height:3rem;">
             <i class="fa-regular fa-handshake"></i>
@@ -42,11 +45,13 @@
         <% end %>
       </div>
 
-      <div class="pt-3">
-        <h4>New Post</h4>
+      <div class="bg-light">
+        <hr>
+          <h4><i class="fa-regular fa-paste"></i> New post</h4>
+        <hr>
+      </div>
         <!--投稿フォーム呼び出し-->
         <%= render 'public/posts/post_form', post: @post %>
-      </div>
     </div>
 
     <div class="col-md-8 offset-md-1">
