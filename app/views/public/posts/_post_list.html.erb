@@ -14,7 +14,7 @@
       <%= post.created_at.strftime('%Y/%m/%d') %><br>
       <%= post.created_at.strftime('%H:%M') %><br>
       <%= link_to user_path(post.user.id) do %>
-        <%= post.user.name %>
+        <%= post.user.name.truncate(12, omission: '..') %>
       <% end %>
     </td>
 
@@ -22,7 +22,7 @@
     <td><%= image_tag post.get_image(100,100), class: "list_image" %></td>
     <td class="text-truncate" style="max-width: 300px;">
       <%= link_to post_path(post.id), class: "text-decoration-none text-info font-weight-bold" do %>
-        <%= post.title %>
+        <%= post.title.truncate(12, omission: '..') %>
       <% end %>
     </td>
     <!--いいね数表記-->

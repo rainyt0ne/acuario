@@ -1,0 +1,38 @@
+<div class="container py-5">
+  <div class="row justify-content-center mb-5">
+    <div class="text-center">
+      <h1><i class="fa-solid fa-triangle-exclamation fa-2x"></i></h1>
+      <br>
+      <h2>退会お手続き</h2>
+    </div>
+  </div>
+
+
+   <div class="row justify-content-center text-center mb-5">
+     退会手続きをされますと、全てのサービスがご利用いただけなくなります。<br>
+     再度ご利用をいただく場合には、新規登録のお手続きが必要になります。<br>
+     本当に退会してよろしいですか？<br><br>
+     ・<br>
+     ・<br>
+     ・<br><br>
+     本当によろしいですか？<br>
+   </div>
+
+   <div class="row justify-content-center">
+    <table>
+     <tr>
+      <td class="pr-2">
+       <%= link_to withdrawal_path, method: :patch, "data-confirm" => "本当の本当に退会しますか？" do %>
+        <button type="button" class="btn btn-danger">退会する</button>
+       <% end %>
+      </td>
+      <td class="pl-2">
+       <%= link_to user_path(current_user) do %>
+        <button type="button" class="btn btn-primary">退会しない</button>
+       <% end %>
+      </td>
+     </tr>
+    </table>
+   <div>
+
+</div>

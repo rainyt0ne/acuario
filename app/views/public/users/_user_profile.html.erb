@@ -1,25 +1,27 @@
-<div class="image mb-3">
-  <%= link_to user_path(user.id) do %>
-    <%= image_tag user.get_profile_image(90,90), class: "profile_image" %>
-  <% end %>
-  <% if user.id == current_user.id %>
-    <span class="ml-3">Me</span>
-  <% else %>
-    <span class="ml-3">Other</span>
-  <% end %>
+<!--プロフィール画像呼出 & 本人ならMe/他人ならOtherを付ける-->
+<div class="image bg-light mb-3 pl-2">
+  <hr>
+    <%= link_to user_path(user.id) do %>
+      <%= image_tag user.get_profile_image(120,120), class: "profile_image" %>
+    <% end %>
+    <span class="ml-3 <%= user.id == current_user.id ? 'self' : 'others' %>"> <%= user.id == current_user.id ? 'Me' : 'Others' %></span>
+  <hr>
 </div>
 
-<table class="table table-striped">
-  <tr>
-    <th><i class="fa-solid fa-signature"></i> User name</th>
-  </tr>
-  <tr>
-    <td><strong><%= user.name %></strong></td>
-  </tr>
-  <tr>
-    <th><i class="fa-regular fa-hand"></i> Introduction</th>
-  </tr>
-  <tr>
-    <td><strong><%= user.introduction %></strong></td>
-  </tr>
-</table>
+<!--当該ユーザー名を表示-->
+<div>
+  <div class="bg-light pl-2">
+    <hr>
+      <h6><i class="fa-solid fa-signature"></i> User name:</h6>
+      <h3><%= user.name.truncate(14, omission: '..') %></h3>
+    <hr>
+  </div>
+
+  <!--紹介文を表示-->
+  <div class="bg-light pl-2">
+    <hr>
+      <h6><i class="fa-regular fa-hand"></i> Introduction:</h6>
+      <h5><%= user.introduction.present? ? user.introduction.truncate(12, omission: '..') : 'Hello !' %></h5>
+    <hr>
+  </div>
+</div>

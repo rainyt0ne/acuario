@@ -28,6 +28,15 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  def withdrawal
+    @user = current_user
+    # ユーザー退会フラグをtrueに切り替える
+    @user.update(is_withdrawal: true)
+    reset_session
+    flash[:notice] = "退会処理を実行しました。ご利用ありがとうございました。"
+    redirect_to root_path
+  end
+
   # 特定ユーザーのいいねレコードを全て取得
   def likes
     @user = User.find(params[:id])
@@ -54,13 +63,6 @@ class Public::UsersController < ApplicationController
       @user = User.find(params[:id])
       if @user.name == "Guest"
         redirect_to user_path(current_user), alert: "ゲストログインの方はプロフィール編集出来ません。"
-      end
-    end
-
-    # 退会確認画面でのリロード対策
-    def ensure_confirm
-      if params[:id] == "confirm"
-        redirect_to root_path, alert: "退会確認画面でリロードされた為、トップページに戻りました。"
       end
     end
 
