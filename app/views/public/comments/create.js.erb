@@ -1,0 +1,7 @@
+<!--コメント表示-->
+$('.comments_area').html("<%= j(render 'public/comments/comment-list', post: @post) %>");
+<!--コメント送信フォーム-->
+$('.new-comment').html("<%= j(render 'public/comments/comment-form', post: @post, comment: @comment) %>");
+
+<!--フォーム送信した後にフォームの値を空にする記述-->
+$("textarea").val('');

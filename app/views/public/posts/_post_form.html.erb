@@ -3,6 +3,10 @@
   <div class="form-group">
     <label>image</label>
       <%= f.file_field :image, accept: "image/*" %>
+      <% if action_name == 'edit' %>
+        <%= image_tag post.get_image(90,90), class: "image pl-5" %>
+        <span>Now image</span>
+      <% end %>
   </div>
 
   <div class="form-group">

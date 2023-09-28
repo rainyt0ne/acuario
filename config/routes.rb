@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root 'homes#top'
     # 投稿ワード検索用
-    get 'search' => 'searchs#search'
+    get 'search' => 'searches#search'
     # ユーザー退会用
     get '/users/confirm' => 'users#confirm'
     patch '/users/withdrawal' => 'users#withdrawal', as: 'withdrawal'

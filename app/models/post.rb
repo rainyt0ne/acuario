@@ -22,7 +22,7 @@ class Post < ApplicationRecord
   # 投稿検索 (タイトル or 内容　で部分検索)
   def self.search(word)
     if word != ""
-      Post.where(['title LIKE? or body LIKE?', "%{word}%", "%{word}%"])
+      Post.where(['title LIKE? or body LIKE?', "%#{word}%", "%#{word}%"])
     end
   end
 
