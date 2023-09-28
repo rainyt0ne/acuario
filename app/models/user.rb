@@ -10,6 +10,10 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  # 通知機能。activeは自分からの通知、passiveは相手からの通知。
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+
   has_one_attached :profile_image
 
   # 自分 → フォローする側の関係性（与フォロー）
@@ -71,6 +75,16 @@ class User < ApplicationRecord
         )
         notification.save if notification.valid?
     end
+  end
+
+  # 登録日計算
+  def days_since_created
+    # created_atから現在の日付までの経過秒数を計算
+    seconds_since_created = (Time.now - created_at).to_i
+
+    # 経過日数を計算
+    days = seconds_since_created / (24 * 60 * 60)
+    days
   end
 
 end

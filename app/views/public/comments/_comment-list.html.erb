@@ -6,7 +6,10 @@
     <td colspan="2"><%= comment.comment %></td>
   </tr>
   <tr>
-    <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+    <td>
+      <%= comment.created_at.strftime('%Y/%m/%d') %><br>
+      <%= comment.created_at.strftime('%H:%M') %>
+    </td>
     <td>
       <% if comment.user == current_user %>
         <%= link_to post_comment_path(comment.post,comment), method: :delete, remote: true do %>

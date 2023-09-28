@@ -46,15 +46,15 @@
             </li>
 
             <!--通知-->
-            <!--<li class="nav-item">
-              <%#= link_to notifications_path, class: 'nav-link' do %>
-                <%# if unchecked_notifications.any? %>
-                  <i class="fa-solid fa-bell"></i>
-                <%# else %>
-                  <i class="fa-solid fa-bell-slash"></i>
-                <%# end %>
-              <#% end %>
-            </li>-->
+            <li class="nav-item">
+              <%= link_to notifications_path, class: 'nav-link' do %>
+                <% if unchecked_notifications.any? %>
+                  <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
+                <% else %>
+                  <i class="fa-solid fa-bell-slash" style="color: #ffffff;"></i>
+                <% end %>
+              <% end %>
+            </li>
 
           <!--管理者側ログイン-->
           <% elsif admin_signed_in? %>
@@ -92,6 +92,12 @@
               <% end %>
             </li>
           <% end %>
+
+           <li class="nav-item pt-2 pl-2">
+             <div>
+               <%= render '/public/searches/search' %>
+             </div>
+           </li>
 
         </ul>
       </div>

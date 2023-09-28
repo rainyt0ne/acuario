@@ -2,7 +2,9 @@
   <tr>
     <th>Image</th>
     <th>Name</th>
-    <th>Follower</th>
+    <th>Followee/Follower</th>
+    <th>Post count</th>
+    <th>Elapsed days</th>
   </tr>
   <% @users.each do |user| %>
   <tr>
@@ -12,7 +14,11 @@
         <%= user.name %>
       <% end %>
     </td>
-    <td><%= user.followers.count %></td>
+    <td class="text-center">
+      <%= user.followings.count %> / <%= user.followers.count %>
+    </td>
+    <td class="text-center"><%= user.posts.count %></td>
+    <td class="text-center"><%= user.days_since_created %> days..</td>
   </tr>
   <% end %>
 </table>
