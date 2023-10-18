@@ -1,6 +1,5 @@
 class Public::PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit,:update,:destroy]
-  before_action :ensure_guest, only: [:new]
 
   def new
     @post = Post.new
@@ -61,13 +60,6 @@ class Public::PostsController < ApplicationController
       @post = Post.find(params[:id])
       unless @post.user == current_user
         redirect_to posts_path, alert: "不正なアクセスのため、投稿一覧へ移動しました。"
-      end
-    end
-
-    # ゲストの投稿規制
-    def ensure_guest
-      if current_user.name == "Guest"
-        redirect_to posts_path, alert: "ゲストログインの方は投稿サービスをご利用出来ません。"
       end
     end
 
