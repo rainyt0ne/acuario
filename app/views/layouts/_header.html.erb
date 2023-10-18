@@ -56,6 +56,12 @@
               <% end %>
             </li>
 
+            <li class="nav-item pt-2 pl-2">
+             <div>
+               <%= render '/public/searches/search' %>
+             </div>
+            </li>
+
           <!--管理者側ログイン-->
           <% elsif admin_signed_in? %>
             <li class="nav-item">
@@ -66,6 +72,11 @@
             <li class="nav-item">
               <%= link_to admin_posts_path,class: 'nav-link text-light' do %>
                 <i class="fa-solid fa-tower-cell"></i> <strong>Posts</strong>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to admin_comments_path,class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-comments"></i> <strong>Comments</strong>
               <% end %>
             </li>
             <li class="nav-item">
@@ -91,13 +102,12 @@
                 <i class="fa-solid fa-person-circle-check"></i> <strong>Guest</strong>
               <% end %>
             </li>
-          <% end %>
-
-           <li class="nav-item pt-2 pl-2">
+            <li class="nav-item pt-2 pl-2">
              <div>
                <%= render '/public/searches/search' %>
              </div>
-           </li>
+            </li>
+          <% end %>
 
         </ul>
       </div>
