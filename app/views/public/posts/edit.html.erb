@@ -1,0 +1,26 @@
+<div class="container py-5">
+
+  <div class="row">
+    <div class="col-md-2 text-center mt-5">
+      <button type="button" class="btn btn-secondary rounded-circle p-0 top-btn", style="width:10rem;height:10rem;">
+        <h2><strong>Edit Post</strong></h2>
+      </button><br>
+      <button type="button" class="btn btn-secondary rounded-circle p-0 mt-2 mr-5 top-btn", style="width:3rem;height:3rem;"></button><br>
+      <button type="button" class="btn btn-secondary rounded-circle p-0 mt-2 ml-5 top-btn", style="width:1rem;height:1rem;"></button><br>
+      <button type="button" class="btn btn-secondary rounded-circle p-0 mt-2 mr-3 top-btn", style="width:2rem;height:2rem;"></button>
+    </div>
+
+    <div class="col-md-9 offset-md-1 mt-5">
+      <div class="row">
+        <div class="col"><h2>Edit your post</h2></div>
+      </div>
+
+      <div class="post-form">
+        <!--投稿フォーム呼び出し-->
+        <%= render 'post_form', post: @post %>
+      </div>
+      <%= link_to '<< Back', post_path(@post) %>
+
+    </div>
+  </div>
+</div>

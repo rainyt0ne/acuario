@@ -1,2 +1,55 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="top_image">
+      <%= image_tag 'top.jpg', width: "100%", height: "100%" %>
+      <div class="top_font">
+        <h1>Welcome to <i class="fa-solid fa-otter"></i><strong> Acuario </strong><i class="fa-solid fa-fish-fins"></i></h1><br>
+        <br>
+        <br>
+        <h3>About</h3>
+        <p>
+          全国の<strong>水族館情報</strong>が集まるサイトです。あなたの好きな<strong>水生生物</strong>について投稿しましょう！<br>
+          ※ご利用には登録していただく必要があります。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row py-5 justify-content-center">
+    <div class="col-md-3 text-center">
+      <%= link_to new_user_registration_path do %>
+        <button type="button" class="btn btn-info rounded-circle p-0 top-btn", style="width:15rem;height:15rem;">
+          <p><strong>Sign up</strong></p>
+          <h1><i class="fa-solid fa-disease"></i></h1><br>
+          ユーザー登録する</button>
+          <button type="button" class="btn btn-info rounded-circle p-0 mt-2 mr-5 top-btn", style="width:3rem;height:3rem;"></button><br>
+          <button type="button" class="btn btn-info rounded-circle p-0 mt-2 ml-5 top-btn", style="width:1rem;height:1rem;"></button><br>
+          <button type="button" class="btn btn-info rounded-circle p-0 mt-2 mr-3 top-btn", style="width:2rem;height:2rem;"></button>
+      <% end %>
+    </div>
+
+    <div class="col-md-3 text-center">
+      <%= link_to new_user_session_path do %>
+          <button type="button" class="btn btn-success rounded-circle p-0 top-btn", style="width:15rem;height:15rem;">
+            <p><strong>Log in</strong></p>
+            <h1><i class="fa-solid fa-shrimp"></i></h1><br>
+            ログインする</button>
+          <button type="button" class="btn btn-success rounded-circle p-0 mt-2 mr-5 top-btn", style="width:3rem;height:3rem;"></button><br>
+          <button type="button" class="btn btn-success rounded-circle p-0 mt-2 ml-5 top-btn", style="width:1rem;height:1rem;"></button><br>
+          <button type="button" class="btn btn-success rounded-circle p-0 mt-2 mr-3 top-btn", style="width:2rem;height:2rem;"></button>
+      <% end %>
+    </div>
+
+    <div class="col-md-3 text-center">
+      <%= link_to users_guest_sign_in_path, method: :post do %>
+          <button type="button" class="btn btn-secondary rounded-circle p-0 top-btn", style="width:15rem;height:15rem;">
+            <p><strong>Guest Log in</strong></p>
+            <h1><i class="fa-solid fa-anchor"></i></h1><br>
+            ゲストとしてログイン<br>(閲覧用)</button>
+          <button type="button" class="btn btn-secondary rounded-circle p-0 mt-2 mr-5 top-btn", style="width:3rem;height:3rem;"></button><br>
+          <button type="button" class="btn btn-secondary rounded-circle p-0 mt-2 ml-5 top-btn", style="width:1rem;height:1rem;"></button><br>
+          <button type="button" class="btn btn-secondary rounded-circle p-0 mt-2 mr-3 top-btn", style="width:2rem;height:2rem;"></button>
+      <% end %>
+    </div>
+  </div>
+</div>

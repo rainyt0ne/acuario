@@ -1,0 +1,46 @@
+<table class= "table">
+  <tr>
+    <th>Post Date</th>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Like</th>
+    <th>Comment</th>
+  </tr>
+
+  <% posts.each do |post| %>
+  <tr>
+    <!--投稿日表記-->
+    <td>
+      <%= post.created_at.strftime('%Y/%m/%d') %><br>
+      <%= post.created_at.strftime('%H:%M') %><br>
+      <%= link_to user_path(post.user.id) do %>
+        <%= post.user.name.truncate(12, omission: '..') %>
+      <% end %>
+    </td>
+
+    <!--投稿画像表記-->
+    <td><%= image_tag post.get_image(100,100), class: "list_image" %></td>
+    <td class="text-truncate" style="max-width: 300px;">
+      <%= link_to post_path(post.id), class: "text-decoration-none text-info font-weight-bold" do %>
+        <%= post.title.truncate(12, omission: '..') %>
+      <% end %>
+    </td>
+    <!--いいね数表記-->
+    <td>
+      <% if post.liked_by?(current_user) %>
+        <i class="fa-solid fa-heart" style="color: #003366;"></i> <%= post.likes.count %>
+      <% else %>
+        <i class="fa-regular fa-heart" style="color: #003366;"></i> <%= post.likes.count %>
+      <% end %>
+    </td>
+    <!--コメント数表記-->
+    <td class="text-center">
+      <% if post.comment_by?(current_user) %>
+        <i class="fa-solid fa-comment" style="color: #003366;"></i> <%= post.comments.count %>
+      <% else %>
+        <i class="fa-regular fa-comment" style="color: #003366;"></i> <%= post.comments.count %>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>

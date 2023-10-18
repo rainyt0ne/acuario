@@ -1,0 +1,47 @@
+<div class="container py-5">
+
+  <div class="row">
+    <div class="col-md-2 text-center mt-5">
+      <button type="button" class="btn btn-secondary rounded-circle p-0 top-btn", style="width:10rem;height:10rem;">
+        <h2><strong>Edit Profile</strong></h2>
+      </button><br>
+      <button type="button" class="btn btn-secondary rounded-circle p-0 mt-2 mr-5 top-btn", style="width:3rem;height:3rem;"></button><br>
+      <button type="button" class="btn btn-secondary rounded-circle p-0 mt-2 ml-5 top-btn", style="width:1rem;height:1rem;"></button><br>
+      <button type="button" class="btn btn-secondary rounded-circle p-0 mt-2 mr-3 top-btn", style="width:2rem;height:2rem;"></button>
+    </div>
+
+    <div class="col-md-9 offset-md-1 mt-5">
+      <div class="row">
+        <div class="col"><h2>Edit your profile</h2></div>
+        <div class="col text-right"><%= link_to "退会する", users_confirm_path, class: "btn btn-danger" %></div>
+      </div>
+
+      <%= form_with model: @user do |f| %>
+        <div class="form-group">
+          <label>User name</label>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <label>image</label>
+          <%= f.file_field :profile_image, accept: "image/*" %>
+          <%= image_tag @user.get_profile_image(90,90), class: "profile_image pl-5" %>
+          <span>Now image</span>
+        </div>
+
+        <div class="form-group">
+          <label>introduction</label>
+          <%= f.text_area :introduction, rows: '5', class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit '変更を保存', class: 'btn btn-info' %>
+        </div>
+      <% end %>
+      <div class="my-3">
+        <%= link_to 'Back', :back %>
+      </div>
+
+    </div>
+  </div>
+</div>

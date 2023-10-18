@@ -1,0 +1,41 @@
+<div class="container py-5">
+  <div class="row">
+
+    <div class="col-md-2 text-center mt-5">
+      <button type="button" class="btn btn-warning text-light rounded-circle p-0 top-btn", style="width:10rem;height:10rem;">
+        <h2><strong>Posts</strong></h2>
+      </button><br>
+      <button type="button" class="btn btn-warning rounded-circle p-0 mt-2 mr-5 top-btn", style="width:3rem;height:3rem;"></button><br>
+      <button type="button" class="btn btn-warning rounded-circle p-0 mt-2 ml-5 top-btn", style="width:1rem;height:1rem;"></button><br>
+      <button type="button" class="btn btn-warning rounded-circle p-0 mt-2 mr-3 top-btn", style="width:2rem;height:2rem;"></button>
+    </div>
+
+    <div class="col-md-9 offset-md-1 py-4">
+      <table class="table">
+        <tr>
+          <th>Post date</th>
+          <th>Title</th>
+          <th>User name</th>
+          <th>Delete</th>
+        </tr>
+
+        <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
+          <td><%= post.title.truncate(12, omission: '..') %></td>
+          <td><%= post.user.name %></td>
+          <td>
+            <%= link_to admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+              <i class="fa-solid fa-trash-can" style="color: #3953a2;"></i>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+      <div>
+        <%= paginate @posts %>
+      </div>
+    </div>
+
+  </div>
+</div>

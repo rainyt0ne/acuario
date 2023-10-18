@@ -6,11 +6,23 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!--scrollreveal-->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!--fontawesome-->
+    <script src="https://kit.fontawesome.com/838f32accd.js" crossorigin="anonymous"></script>
+
+    <!--google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mooli&display=swap" rel="stylesheet">
+
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <%= render "layouts/header" %>
     <% if flash[:notice] %>
       <div class="notice">
         <p><%= notice %></p>
@@ -22,5 +34,6 @@
       </div>
     <% end %>
     <%= yield %>
+    <%= render "layouts/footer" %>
   </body>
 </html>

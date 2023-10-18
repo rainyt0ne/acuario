@@ -1,0 +1,27 @@
+<% notifications.where.not(visitor_id: current_user.id).each do |notification| %>
+  <% visitor = notification.visitor %>
+  <% visited = notification.visited %>
+  <div class="col-md-10 mx-auto">
+    <div class="form-inline">
+      <!--コメントもしくはいいねしたユーザーのアイコンと名前表示-->
+      <span>
+        <%= image_tag visitor.get_profile_image(90,90), class: "notification_image" %>
+        <strong>　<%= visitor.name %></strong>さんが
+      </span>
+
+      <% if notification.action == 'like' %>
+        <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;", class: "text-decoration-none text-info font-weight-bold" %>
+        <%= "にいいねしました" %>
+      <% elsif notification.action == 'comment' %>
+        <%= link_to "あなたの投稿", notification.post, style: "font-weight: bold;", class: "text-decoration-none text-info font-weight-bold" %>
+        <%= "にコメントしました" %>
+      <% end %>
+    </div>
+
+  <!--いつ通知が来たか時間を表示-->
+  <div class="small text-muted text-right">
+    <%= time_ago_in_words(notification.created_at).upcase %> 前
+  </div>
+  <hr>
+  </div>
+<% end %>

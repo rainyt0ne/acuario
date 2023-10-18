@@ -1,0 +1,24 @@
+<table class="table">
+  <tr>
+    <th>Image</th>
+    <th>Name</th>
+    <th>Followee/Follower</th>
+    <th>Post count</th>
+    <th>Elapsed days</th>
+  </tr>
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= image_tag user.get_profile_image(90,90), class: "profile_image" %></td>
+    <td class="text-truncate" style="max-width: 300px;">
+      <%= link_to user_path(user.id), class: "text-decoration-none text-info font-weight-bold" do %>
+        <%= user.name.truncate(12, omission: '..') %>
+      <% end %>
+    </td>
+    <td class="text-center">
+      <%= user.followings.count %> / <%= user.followers.count %>
+    </td>
+    <td class="text-center"><%= user.posts.count %></td>
+    <td class="text-center"><%= user.days_since_created %> days..</td>
+  </tr>
+  <% end %>
+</table>

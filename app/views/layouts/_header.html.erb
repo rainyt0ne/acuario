@@ -1,0 +1,116 @@
+<header>
+  <!--ナビゲーションバー-->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+
+      <!--ヘッダーロゴ-->
+      <%= link_to root_path do %>
+        <%= image_tag("acuario.png", width: 90, height: 90) %>
+      <% end %>
+
+      <!--メニュー-->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+        <div>
+          <% if user_signed_in? %>
+            ようこそ、 <strong><%= current_user.name %></strong> さん！
+          <% end %>
+        </div>
+        <ul class="navbar-nav ml-auto">
+
+          <!--ユーザー側ログイン-->
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to user_path(current_user.id),class: 'nav-link text-light' do %>
+                <i class="fas fa-home"></i> <strong>Home</strong>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_path,class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-people-group"></i> <strong>Users</strong>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to posts_path,class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-tower-cell"></i> <strong>Posts</strong>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>
+                <i class="fas fa-sign-out-alt"></i> <strong>Log out</strong>
+              <% end %>
+            </li>
+
+            <!--通知-->
+            <li class="nav-item">
+              <%= link_to notifications_path, class: 'nav-link' do %>
+                <% if unchecked_notifications.any? %>
+                  <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
+                <% else %>
+                  <i class="fa-solid fa-bell-slash" style="color: #ffffff;"></i>
+                <% end %>
+              <% end %>
+            </li>
+
+            <li class="nav-item pt-2 pl-2">
+             <div>
+               <%= render '/public/searches/search' %>
+             </div>
+            </li>
+
+          <!--管理者側ログイン-->
+          <% elsif admin_signed_in? %>
+            <li class="nav-item">
+              <%= link_to admin_users_path,class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-people-group"></i> <strong>Users</strong>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to admin_posts_path,class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-tower-cell"></i> <strong>Posts</strong>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to admin_comments_path,class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-comments"></i> <strong>Comments</strong>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %>
+                <i class="fas fa-sign-out-alt"></i> <strong>Log out</strong>
+              <% end %>
+            </li>
+
+          <!--ログイン前-->
+          <% else %>
+            <li class="nav-item">
+              <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
+                <i class="fas fa-user-plus"></i> <strong>Sign up</strong>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
+                <i class="fas fa-sign-in-alt"></i> <strong>Log in</strong>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_guest_sign_in_path, method: :post, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-person-circle-check"></i> <strong>Guest</strong>
+              <% end %>
+            </li>
+            <li class="nav-item pt-2 pl-2">
+             <div>
+               <%= render '/public/searches/search' %>
+             </div>
+            </li>
+          <% end %>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

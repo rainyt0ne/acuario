@@ -10,14 +10,20 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  # 通知機能。activeは自分からの通知、passiveは相手からの通知。
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+
+  has_one_attached :profile_image
+
   # 自分 → フォローする側の関係性（与フォロー）
-  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   # フォロワー → 自分のされる側の関係性（被フォロー）
-  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   # 自分のフォロー一覧
-  has_many :followings, through: :active_relationships, source: :followed
+  has_many :followings, through: :relationships, source: :followed
   # 自分のフォロワー一覧
-  has_many :followers, through: :passive_relationships, source: :follower
+  has_many :followers, through: :reverse_of_relationships, source: :follower
 
   # フォローする
   def follow(user_id)
@@ -34,15 +40,13 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  has_one_attached :profile_image
-
   # プロフィール画像編集 （無ければサンプル画像添付）
   def get_profile_image(width, height)
     unless profile_image.attached?
-      file_path = Rails.root.join("app/assets/images/no_image.png")
+      file_path = Rails.root.join("app/assets/images/no_image.jpg")
       profile_image.attach(io: File.open(file_path), filename: "default-image.jpg", content_type: "image/jpeg")
     end
-    profile_image.variant(realize_to_fill: [width, height], gravity: :center).processed
+    profile_image.variant(resize_to_fill: [width, height], gravity: :center).processed
   end
 
   # ゲストユーザーの検索（存在しなければランダムパスワードで作成）
@@ -58,6 +62,29 @@ class User < ApplicationRecord
     if search != ""
       User.where(['name LIKE?', "%#{search}%"])
     end
+  end
+
+  # 通知作成(フォロー)
+  def create_notification_follow!(current_user)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    # 通知がない場合、作成
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: 'follow'
+        )
+        notification.save if notification.valid?
+    end
+  end
+
+  # 登録日計算
+  def days_since_created
+    # created_atから現在の日付までの経過秒数を計算
+    seconds_since_created = (Time.now - created_at).to_i
+
+    # 経過日数を計算
+    days = seconds_since_created / (24 * 60 * 60)
+    days
   end
 
 end
