@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:index, :edit, :update]
     resources :posts, only: [:index, :edit, :update, :destroy]
+    resources :genres, only: [:index, :create, :edit, :update, :destroy]
     resources :comments, only: [:index, :destroy]
   end
 
@@ -47,6 +48,7 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end
+    resources :genres, only: [:show]
     resources :posts do
       # いいね用
       resource :likes, only: [:create, :destroy]

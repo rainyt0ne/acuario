@@ -4,7 +4,10 @@
     <%= link_to user_path(user.id) do %>
       <%= image_tag user.get_profile_image(120,120), class: "profile_image" %>
     <% end %>
-    <span class="ml-3 <%= user.id == current_user.id ? 'self' : 'others' %>"> <%= user.id == current_user.id ? 'Me' : 'Others' %></span>
+    <!--管理者ログインでない場合は表示-->
+    <% if !admin_signed_in? %>
+      <span class="ml-3 <%= user.id == current_user.id ? 'self' : 'others' %>"> <%= user.id == current_user.id ? 'Me' : 'Others' %></span>
+    <% end %>
   <hr>
 </div>
 

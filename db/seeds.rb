@@ -11,3 +11,45 @@ Admin.create!(
   email: 'admin@gmail.com',
   password: '123456'
   )
+
+# ジャンル追加
+Genre.create!(
+    [
+      {
+        name: '水族館'
+      },
+      {
+        name: 'おすすめ順路'
+      },
+      {
+        name: 'おすすめの時間'
+      },
+      {
+        name: 'おすすめスポット'
+      },
+      {
+        name: '海洋生物'
+      },
+      {
+        name: 'グッズ'
+      },
+      {
+        name: 'お魚'
+      },
+      {
+        name: 'シャチ'
+      },
+      {
+        name: 'イルカ'
+      },
+      {
+        name: 'ペンギン'
+      },
+      {
+        name: 'チンアナゴ'
+      },
+      {
+        name: 'ラッコ'
+      },
+    ]
+  )

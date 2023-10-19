@@ -7,13 +7,15 @@
 
       <!--フォロー・アンフォロー-->
       <div class="pb-3">
-        <% unless @users == current_user %>
-          <% if current_user.following?(@users) %>
-            <%= link_to "Follow", user_relationships_path(@users.id), method: :delete,
-              class: 'btn btn-secondary btn-block' %>
-          <% else %>
-            <%= link_to "Unfollow", user_relationships_path(@users.id), method: :post,
-              class: 'btn btn-outline-secondary btn-block' %>
+        <% if !admin_signed_in? %>
+          <% unless @users == current_user %>
+            <% if current_user.following?(@users) %>
+              <%= link_to "Follow", user_relationships_path(@users.id), method: :delete,
+                class: 'btn btn-secondary btn-block' %>
+            <% else %>
+              <%= link_to "Unfollow", user_relationships_path(@users.id), method: :post,
+                class: 'btn btn-outline-secondary btn-block' %>
+            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -35,7 +37,10 @@
       <h2><%= @users.name %> Post</h2>
       <table class="table">
         <tr>
-          <th class="post-title"><%= @post.title %></th>
+          <th class="post-title">
+            <%= @post.title %><br>
+            Genre： <%= @post.genre.name %>
+          </th>
           <td class="text-right">
             <% if @post.user == current_user %>
               <%= link_to edit_post_path(@post.id) do %>
@@ -52,9 +57,11 @@
           </td>
 
           <!--いいね機能-->
-          <td  class="like-<%= @post.id %> text-right">
-            <%= render 'public/likes/like-btn', post: @post %>
-          </td>
+          <% if !admin_signed_in? %>
+            <td  class="like-<%= @post.id %> text-right">
+              <%= render 'public/likes/like-btn', post: @post %>
+            </td>
+          <% end %>
         </tr>
          <tr>
           <td colspan="3"><%= image_tag @post.get_image(500,500) %></td>
@@ -68,9 +75,11 @@
       </table>
 
       <!--コメント送信フォーム-->
-      <div class="new-comment">
-        <%= render 'public/comments/comment-form', post: @post, comment: @comment %>
-      </div>
+      <% if !admin_signed_in? %>
+        <div class="new-comment">
+          <%= render 'public/comments/comment-form', post: @post, comment: @comment %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
