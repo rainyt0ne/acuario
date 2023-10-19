@@ -8,6 +8,7 @@ class Public::PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.all.order(created_at: :desc).page(params[:page]).per(8)
+    @genres = Genre.all
   end
 
   def show
@@ -52,7 +53,7 @@ class Public::PostsController < ApplicationController
 
     # カスタムパラメーターを許可
     def post_params
-      params.require(:post).permit(:image, :title, :body)
+      params.require(:post).permit(:image, :title, :body, :genre_id)
     end
 
     # ユーザー認証（本人でない場合は投稿一覧へ飛ばす）

@@ -1,0 +1,33 @@
+<div class="container py-5">
+
+  <div class="row">
+    <div class="col-md-2 text-center mt-5">
+      <button type="button" class="btn btn-secondary rounded-circle p-0 top-btn", style="width:10rem;height:10rem;">
+        <h2><strong>Edit genre</strong></h2>
+      </button><br>
+      <button type="button" class="btn btn-secondary rounded-circle p-0 mt-2 mr-5 top-btn", style="width:3rem;height:3rem;"></button><br>
+      <button type="button" class="btn btn-secondary rounded-circle p-0 mt-2 ml-5 top-btn", style="width:1rem;height:1rem;"></button><br>
+      <button type="button" class="btn btn-secondary rounded-circle p-0 mt-2 mr-3 top-btn", style="width:2rem;height:2rem;"></button>
+    </div>
+
+    <div class="col-md-9 offset-md-1 mt-5">
+      <%= form_with model: @genre, url: admin_genre_path, method: :patch do |f| %>
+        <table>
+          <tr>
+            <th class="pt-4"><%= f.label :ジャンル変更 %></th>
+          </tr>
+          <tr>
+            <td class="py-2"><%= f.text_field :name %></td>
+          </tr>
+          <tr>
+            <td class="pt-2 pb-4"><%= f.submit '変更を保存', class: 'btn btn-info' %></td>
+          </tr>
+        </table>
+      <% end %>
+      <div class="my-3">
+        <%= link_to 'Back', :back %>
+      </div>
+    </div>
+
+  </div>
+</div>

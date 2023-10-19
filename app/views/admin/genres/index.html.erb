@@ -1,0 +1,71 @@
+<div>
+<% if @genre.errors.any? %>
+  <%= @genre.errors.count %> 件のエラーが発生しました。
+  <ul>
+    <% @genre.errors.full_messages.each do |message| %>
+     <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+</div>
+
+<div class="container py-5">
+  <div class="row">
+
+    <div class="col-md-2 text-center mt-5">
+      <button type="button" class="btn btn-info rounded-circle p-0 top-btn", style="width:10rem;height:10rem;">
+        <h2><strong>Genres</strong></h2>
+      </button><br>
+      <button type="button" class="btn btn-info rounded-circle p-0 mt-2 mr-5 top-btn", style="width:3rem;height:3rem;"></button><br>
+      <button type="button" class="btn btn-info rounded-circle p-0 mt-2 ml-5 top-btn", style="width:1rem;height:1rem;"></button><br>
+      <button type="button" class="btn btn-info rounded-circle p-0 mt-2 mr-3 top-btn", style="width:2rem;height:2rem;"></button>
+
+      <!--ジャンル新規登録フォーム-->
+      <%= form_with model: @genre, url: admin_genres_path do |f| %>
+      <table class="py-3">
+        <tr>
+          <td class="pt-3 text-right">Add genre</td>
+        </tr>
+        <tr>
+          <td class="py-2"><%= f.text_field :name %></td>
+        </tr>
+        <tr>
+          <td class="text-right"><%= f.submit '追加', class: "btn btn-success" %></td>
+        </tr>
+      </table>
+      <% end %>
+    </div>
+
+    <div class="col-md-9 offset-md-1 py-4">
+      <table class="table">
+        <tr>
+          <th>Genre name</th>
+          <th>Genre count</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <% @genres.each do |genre| %>
+        <tr>
+          <td>
+            <%= link_to genre_path(genre.id), class: "text-decoration-none text-info font-weight-bold" do %>
+              <% genre.name %>
+            <% end %>
+          </td>
+          <td><%= genre.posts.count %> 件</td>
+          <td>
+            <%= link_to edit_admin_genre_path(genre.id) do %>
+              <i class="fa-solid fa-gear" style="color: #3953a2;"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to admin_genre_path(genre.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+              <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>
