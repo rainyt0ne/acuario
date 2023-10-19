@@ -1,0 +1,18 @@
+<div class="text-center">
+  <h4>Genre lists</h4>
+  <div>
+    <i class="fa-sharp fa-solid fa-fish-fins" style="color: #248eff;"></i>
+    <i class="fa-sharp fa-solid fa-fish-fins" style="color: #fe9620;"></i>
+    <i class="fa-sharp fa-solid fa-fish-fins" style="color: #45ed51;"></i>
+  </div>
+</div>
+
+<% genres.each do |genre| %><br>
+  <%= link_to genre.name, genre_path(genre.id), class: "text-decoration-none text-info font-weight-bold" %>
+<% end %>
+
+<div class="pt-3">
+  <i class="fa-sharp fa-solid fa-fish-fins" style="color: #248eff;"></i>
+  <i class="fa-sharp fa-solid fa-fish-fins" style="color: #fe9620;"></i>
+  <i class="fa-sharp fa-solid fa-fish-fins" style="color: #45ed51;"></i>
+</div>

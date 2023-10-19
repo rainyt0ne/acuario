@@ -14,6 +14,7 @@
       <table class="table">
         <tr>
           <th>Post date</th>
+          <th>Image</th>
           <th>Title</th>
           <th>User name</th>
           <th>Delete</th>
@@ -22,11 +23,14 @@
         <% @posts.each do |post| %>
         <tr>
           <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
-          <td><%= post.title.truncate(12, omission: '..') %></td>
+          <td><%= image_tag post.get_image(60,60), class: "list_image" %></td>
+          <td class="text-truncate" style="max-width: 250px;">
+            <%= link_to "#{post.title}", post_path(post.id), class: "text-decoration-none text-info font-weight-bold" %>
+          </td>
           <td><%= post.user.name %></td>
           <td>
             <%= link_to admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
-              <i class="fa-solid fa-trash-can" style="color: #3953a2;"></i>
+              <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
             <% end %>
           </td>
         </tr>

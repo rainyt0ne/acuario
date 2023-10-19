@@ -49,7 +49,7 @@
             <li class="nav-item">
               <%= link_to notifications_path, class: 'nav-link' do %>
                 <% if unchecked_notifications.any? %>
-                  <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
+                  <i class="fa-solid fa-bell" style="color: #eeff00;"></i>
                 <% else %>
                   <i class="fa-solid fa-bell-slash" style="color: #ffffff;"></i>
                 <% end %>
@@ -77,6 +77,11 @@
             <li class="nav-item">
               <%= link_to admin_comments_path,class: 'nav-link text-light' do %>
                 <i class="fa-solid fa-comments"></i> <strong>Comments</strong>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to admin_genres_path,class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-bars-staggered"></i> <strong>Genres</strong>
               <% end %>
             </li>
             <li class="nav-item">

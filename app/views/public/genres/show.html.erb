@@ -1,0 +1,72 @@
+<div class="container py-5">
+  <div class="row">
+
+    <div class="col-md-2 text-center">
+      <%= render 'genre_list', genres: @genres %>
+    </div>
+
+    <div class="col-md-9 offset-md-1">
+      <h2>Genre search results</h2>
+      <div class="mt-2 mb-4">
+        >> <%= @genre.name %>
+      </div>
+
+      <table class="table">
+        <!--ジャンル検索結果を表示させる-->
+        <% if @genre.posts.exists? %>
+          <tr>
+            <th>Post Date</th>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Like</th>
+            <th>Comment</th>
+          </tr>
+
+          <% @genre.posts.each do |post| %>
+            <tr>
+              <!--投稿日表記-->
+              <td>
+                <%= post.created_at.strftime('%Y/%m/%d') %><br>
+                <%= post.created_at.strftime('%H:%M') %><br>
+                <%= link_to user_path(post.user.id) do %>
+                  <%= post.user.name.truncate(12, omission: '..') %>
+                <% end %>
+              </td>
+
+              <!--投稿画像表記-->
+              <td><%= image_tag post.get_image(100,100), class: "list_image" %></td>
+              <td class="text-truncate" style="max-width: 300px;">
+                <%= link_to post_path(post.id), class: "text-decoration-none text-info font-weight-bold" do %>
+                  <%= post.title.truncate(12, omission: '..') %>
+                <% end %>
+              </td>
+              <!--いいね数表記-->
+              <td>
+                <% if post.liked_by?(current_user) %>
+                  <i class="fa-solid fa-heart" style="color: #003366;"></i> <%= post.likes.count %>
+                <% else %>
+                  <i class="fa-regular fa-heart" style="color: #003366;"></i> <%= post.likes.count %>
+                <% end %>
+              </td>
+              <!--コメント数表記-->
+              <td class="text-center">
+                <% if post.comment_by?(current_user) %>
+                  <i class="fa-solid fa-comment" style="color: #003366;"></i> <%= post.comments.count %>
+                <% else %>
+                  <i class="fa-regular fa-comment" style="color: #003366;"></i> <%= post.comments.count %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+
+        <!--検索結果が0件の場合-->
+        <% else %>
+          <tr>
+            <th colspan="3">当該のジャンルに紐づいた投稿はまだありません。</th>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+</div>

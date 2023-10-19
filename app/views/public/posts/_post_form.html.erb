@@ -16,6 +16,12 @@
     <%= f.text_field :title, class: "form-control" %>
   </div>
 
+  <!--ジャンル選択-->
+  <div class="form-group">
+    <%= f.label :genre %>
+    <%= f.collection_select :genre_id, Genre.all, :id, :name, {include_blunk: "--ジャンル選択--"} %>
+  </div>
+
   <!--投稿本文入力フォーム-->
   <div class="form-group">
     <%= f.label :body %>
